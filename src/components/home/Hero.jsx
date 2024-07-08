@@ -15,7 +15,7 @@ const Hero = () => {
         Your browser does not support HTML5 video.
       </video>
       <div className="hero-content">
-        <h1>Meerarai</h1>
+        <h1>MeeraAi</h1>
         <p>data talent • future ready</p>
         <Link to="/solutions"><button className="browse-jobs">browse solutions</button></Link>
       </div>
