@@ -1,0 +1,705 @@
+/* Resetting defaults */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 40px;
+    padding-right: 0;
+    background-color: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: white;
+}
+
+/* Navigation styles */
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding-top: 10px;
+}
+
+nav ul li {
+    margin: 0 15px;
+    font-weight: 400;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.header-scroll nav ul li a {
+    color: black; /* Change text color when header scrolls */
+}
+.header-scroll nav ul li{
+    color: black; /* Change text color when header scrolls */
+}
+
+/* Logo styles */
+.logo img {
+    height: 60px; /* Adjust height of logo image */
+}
+
+/* Styles for when header scrolls */
+.header-scroll {
+    background-color: white;
+    color: black;
+}
+
+
+.logout{
+    background-color: rgb(214, 3, 3);
+    color: white;
+    border: 1px solid #333;
+    padding: 10px 20px;
+
+
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    width: 100%;
+}
+
+.logout:hover{
+    background-color: red;
+}
+
+/* Main section styles */
+main {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Background video styles */
+#bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 1;
+    filter: brightness(0.8);
+}
+
+/* Hero content styles */
+.hero-content {
+    text-align: center;
+    color: #fff;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-size: 60px;
+    margin: 0;
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin: 10px 0;
+    color: white;
+}
+
+/* Browse jobs button styles */
+.browse-jobs {
+    background-color: #fff;
+    color: #333;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.browse-jobs::before {
+    content: '\2192'; /* Unicode for right arrow */
+    position: absolute;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.browse-jobs:hover {
+    background-color: #6cb1eec3;
+    color: white;
+}
+
+.browse-jobs:hover::before {
+    opacity: 1;
+}
+
+/* Section 1 styles */
+.section1 {
+    display: flex;
+    padding: 60px;
+    letter-spacing: 0.1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.section1 .text {
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 20px;
+}
+
+.section1 .logo {
+    height: 60px; /* Adjust height of logo */
+}
+
+.section1 .image img {
+    height: 400px;
+    padding-top: 80px;
+}
+
+.section1 button {
+    background-color: #fff;
+    color: #333;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.section1 button::before {
+    content: '\2192'; /* Unicode for right arrow */
+    position: absolute;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.section1 button:hover {
+    background-color: #202020;
+    color: white;
+}
+
+.section1 button:hover::before {
+    opacity: 1;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 0; /* Adjust padding for smaller header */
+    }
+
+    nav ul {
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        display: none;
+        z-index: 1;
+    }
+
+    nav ul.active {
+        display: flex; /* Show navigation links when active */
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+
+    .logo img {
+        height: 40px; /* Decrease height of logo for smaller screens */
+    }
+
+    .section1 {
+        padding: 20px; /* Adjust section padding for smaller screens */
+        flex-direction: column;
+    }
+
+    .section1 .image img {
+        height: 300px; /* Adjust height of image for smaller screens */
+        width: 350px;
+        padding-top: 50px;
+    }
+
+    .section1 button {
+        padding: 12px 24px; /* Adjust button padding for smaller screens */
+        font-size: 16px; /* Decrease font size of button text */
+    }
+}
+
+/* Dropdown menu for smaller screens */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333333dd;
+    width: 80%;
+    text-align: center;
+    display: none;
+    z-index: 1;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu ul {
+    padding: 0;
+}
+
+.dropdown-menu li {
+    padding: 10px 0;
+}
+
+.dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+    color: gray;
+}
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none; /* Hide menu toggle on large screens */
+    }
+}
+
+
+/*flippers*/
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+ .section2{
+    background-color: #6c82a3;
+ }
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #6c82a3;
+    color: white;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+.header p {
+    margin: 10px 0 0;
+    color: white;
+    font-size: 18px;
+    padding: 0 350px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.flip-container {
+    perspective: 1000px;
+    width: 300px;
+    height: 350px;
+    flex: 1 1 calc(33.333% - 40px);
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .flip-container {
+        flex: 1 1 calc(50% - 40px);
+    }
+
+    .header p{
+        padding: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .flip-container {
+        flex: 1 1 100%;
+        height: 450px;
+    }
+    .header p{
+        padding: 0;
+    }
+}
+
+.flipper {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.flip-container.hover .flipper, .flip-container.click .flipper {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.front {
+    background-color: white;
+}
+
+.back {
+    background-color: #e0e0e0;
+    transform: rotateY(180deg);
+}
+
+.icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    word-spacing: 0.001em;
+}
+
+
+/*jobs section*/
+.latest-jobs {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+.latest-jobs h2 {
+    font-size: 2em;
+    color: #ffb74d;
+}
+.jobs-container {
+    border-top: 1px dotted;
+    border-bottom: 1px dotted;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.job-card {
+    padding: 20px;
+    width: 30%;
+    text-align: left;
+}
+.job-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.job-card p {
+    margin: 5px 0;
+}
+.job-card .job-type {
+    color: #5a5a5a;
+}
+.job-card .job-type.permanent {
+    color: #2a7ae4;
+}
+.job-card .job-type.fixed-term {
+    color: #f57c00;
+}
+.job-card .salary {
+    font-weight: bold;
+}
+.job-card button {
+    background-color: #ffb74d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.view-all-jobs {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .job-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .jobs-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+}
+
+/*ShopSection*/
+
+.products-grid{
+    display: flex;
+    flex-direction: row;
+}  
+  .shop-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .shop-button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .products-grid {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  
+/* Footer Styling */
+
+.footer {
+            background-color: #b1ddf236;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 50px 0;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .contact {
+            margin-top: 15px;
+        }
+
+        .contact span {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .social-media {
+            margin-top: 15px;
+        }
+
+        .social-media a {
+            display: inline-block;
+            margin-right: 10px;
+            transition: color 0.3s ease;
+            color: cyan;
+        }
+
+        .social-media a:hover {
+            color: blue;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                margin: 0;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Styling for the Quick Links section */
+        .footer-section.quick-links {
+            flex: 1;
+        }
+
+        .footer-section.quick-links h2 {
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .footer-section.quick-links ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section.quick-links ul li {
+            margin-bottom: 5px;
+        }
+
+        .footer-section.quick-links ul li a {
+            text-decoration: none;
+            transition: color 0.3s ease;
+            color: rgb(2, 126, 126);
+        }
+
+        .footer-section.quick-links ul li a:hover {
+            color: blue;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #0c0c0c;
+            color: black;
+        }
+
+        /* Social Media Icons Styles */
+        .social-media {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-media img {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Specific CSS for the About Us section */
+        .footer-section.about {
+            color: #ffcc00; /* Change this color to your desired color */
+        }
+
+        /* Adjust contact and social media colors if needed */
+        .footer-section.about .contact span,
+        .footer-section.about .social-media a {
+            color: #ffcc00; /* Change this color to your desired color */
+        }
+        .flip-container {
+            perspective: 1000px;
+            transition: transform 0.6s;
+          }
+          
+          .flip-container.flip .flipper {
+            transform: rotateY(180deg);
+          }
+          
+          .flipper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+          }
+          
+          .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+          }
+          
+          .front {
+            z-index: 2;
+            transform: rotateY(0deg);
+          }
+          
+          .back {
+            transform: rotateY(180deg);
+          }
+          
+          /*details*/
+          .detail{
+            flex: 1;
+        
+            .user{
+                display: flex;
+                align-items: center;
+                gap: 25px;
+
+                @media(max-width:768px){
+                    h2,p{color: white;}
+                }
+                
+        
+                img{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+

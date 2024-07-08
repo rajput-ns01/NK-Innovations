@@ -1,0 +1,125 @@
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.container2 {
+    padding: 40px;
+    gap: 20px;
+    padding-top: 150px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 30%;
+    padding: 20px;
+    margin: 5px;
+    border: #e55a00 1px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+.card img {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.card h3 {
+    color: #f60;
+    font-size: 24px;
+    margin-bottom: 10px;
+    padding-left: 70px; /* Adjusted for image padding */
+}
+.card h4 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+.card p {
+    margin: 10px 0;
+}
+.card ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+.card ul li {
+    margin-bottom: 5px;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    padding-right: 10px;
+    margin-top: 10px;
+    color:#f60;
+    border: #f60 1px solid;
+    background-color: white;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    width: 90%;
+}
+.button:hover {
+    background-color: #e55a00;
+    color: white;
+}
+
+@media (max-width:768px){
+    .container2{
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        padding-top: 80px;
+    }
+    .card{
+        padding: 10px;
+        margin: 0;
+        width: 100%;
+    }
+}
+.contact-section {
+    background-color: #f7f7f7;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #0056b3;
+}

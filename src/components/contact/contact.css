@@ -1,0 +1,92 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+.container1 {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: url("../assets/images/contact.png")repeat-x;
+
+}
+.container1 h1, h2 {
+    margin: 0 0 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+.container1 h1 {
+    font-size: 2.5em;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    color: #0781fa;
+    text-align: center;
+}
+.container1 h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #0799fa;
+}
+.container1 p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: rgb(4, 241, 99);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+.form-group textarea {
+    resize: vertical;
+    height: 150px;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+.btn:hover {
+    background: #3498db;
+}
+label{
+    color: white;
+}
+@media (max-width: 768px) {
+    .container1 {
+        width: 100%;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    p, .form-group input, .form-group textarea {
+        font-size: 1em;
+    }
+   
+}
+
+
