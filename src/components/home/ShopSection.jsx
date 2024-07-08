@@ -43,8 +43,8 @@ const ShopSection = () => {
         ))}
       </div>
       {/* Add a button to navigate to the shop page */}
-      <button onClick={() => window.location.href = '/shop'} className="shop-button">Shop All Products</button>
-    </div>
+      <a href="/shop" className="shop-button">Shop All Products</a>
+      </div>
   );
 };
 
