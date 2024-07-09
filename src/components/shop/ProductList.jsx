@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { dispatch } = useContext(CartContext);
 
   const addToCart = (product) => {
@@ -34,13 +35,23 @@ const Products = () => {
         }));
 
         setProducts(productsList);
+        setLoading(false); // Set loading to false after fetching products
       } catch (error) {
         console.error('Error fetching products:', error);
+        setLoading(false); // Set loading to false even if there's an error
       }
     };
 
     fetchProducts();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-text">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <>

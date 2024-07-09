@@ -24,6 +24,7 @@ import Cart from './components/shop/Cart';
 import CartProducts from './components/shop/CartProduct';
 import { Cashout } from './components/shop/Cashout';
 import ShopSection from './components/home/ShopSection';
+import CustomProductPage from './components/rawMaterials/CustomProductPage';
 
 
 const Home = () => (
@@ -50,14 +51,17 @@ const App = () => {
     };
   }, [fetchUserInfo]);
 
-  if (isLoading) return <div className="loading">Loading...</div>;
-
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-text">Loading...</div>
+      </div>
+    );
+  }
   return (
-    
     <div className="app">
       <CartContextProvider>
-      <Router>
-        {currentUser ? (
+        <Router>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -67,20 +71,18 @@ const App = () => {
             <Route path="/job" element={<JobPage />} />
             <Route path="/login" element={<Login />} />
             {/* Uncomment and choose one route for shop */}
-             <Route path="/shop" element={<ShopHome />} /> 
-           {/*<Route path="/shop" element={<AddProducts />} /> */}
-           <Route path="/cart" element={<Cart user={currentUser} />} />
-           <Route path="/shop/cartproducts" element={<CartProducts/>} /> {/* Add this line */}
-          <Route path='/shop/cartproducts/cashout' element={<Cashout user={currentUser}/>}/>
-           </Routes>
-        ) : (
-          <Login />
-        )}
-      </Router>
-      <Notification />
+            <Route path="/shop" element={<ShopHome />} /> 
+            {/*<Route path="/shop" element={<AddProducts />} /> */}
+            <Route path="/cart" element={<Cart user={currentUser} />} />
+            <Route path="/shop/cartproducts" element={<CartProducts />} />
+            <Route path='/shop/cartproducts/cashout' element={<Cashout user={currentUser} />} />
+            <Route path="/custom-product" element={<CustomProductPage />} />
+          </Routes>
+          {!currentUser && <Login />}
+        </Router>
+        <Notification />
       </CartContextProvider>
     </div>
-
   );
 };
 

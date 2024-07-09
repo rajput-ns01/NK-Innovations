@@ -703,3 +703,22 @@ p {
         }
 
 
+/* index.css or any global stylesheet */
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Semi-transparent background */
+    z-index: 9999; /* Ensure it covers the whole page */
+  }
+  
+  .loading-text {
+    font-size: 24px;
+    color: #333;
+  }
+  

@@ -1,0 +1,92 @@
+/* src/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+  
+  
+  .custom h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .custom h2 {
+    margin-top: 20px;
+    color: #555;
+  }
+  
+  .custom form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .custom label {
+    margin-bottom: 10px;
+    color: #666;
+    background-color: #f0f0f0;
+  }
+  
+  .custom input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .custom input[type="file"] {
+    margin-top: 10px;
+  }
+  
+  .custom button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .custom button:hover {
+    background-color: #0056b3;
+  }
+  
+  .custom ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .custom ul li {
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .custom ul li h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .custom ul li p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .custom .alert {
+    background-color: #ffc107;
+    color: #333;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+  
