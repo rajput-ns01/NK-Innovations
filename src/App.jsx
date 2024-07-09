@@ -78,7 +78,6 @@ const App = () => {
             <Route path='/shop/cartproducts/cashout' element={<Cashout user={currentUser} />} />
             <Route path="/custom-product" element={<CustomProductPage />} />
           </Routes>
-          {!currentUser && <Login />}
         </Router>
         <Notification />
       </CartContextProvider>
