@@ -82,7 +82,7 @@ const App = () => {
             <Route path='/shop/cartproducts/cashout' element={<Cashout user={currentUser} />} />
             <Route path='/customize/cartproducts/cashout' element={<Cashout user={currentUser} />} />
             <Route path="/customize" element={<CustomizationPage/>} />
-            <Route path="/upload" element={<UploadForm/>} />
+            {/*<Route path="/upload" element={<UploadForm/>} />*/}
 
             {/*--------------Admin Part------------------*/}
             <Route path='/admin' element={<Dashboard/>}/>
