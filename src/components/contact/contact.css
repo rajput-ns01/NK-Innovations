@@ -70,9 +70,7 @@ body {
 .btn:hover {
     background: #3498db;
 }
-label{
-    color: white;
-}
+
 @media (max-width: 768px) {
     .container1 {
         width: 100%;

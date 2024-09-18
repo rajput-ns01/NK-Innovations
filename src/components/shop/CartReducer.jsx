@@ -71,7 +71,7 @@ export const CartReducer = (state, action) => {
         case 'DEC':
             updatedCart = shoppingCart.map(item => {
                 if (item.ProductID === action.id) {
-                    const newQty = item.qty - 1 > 0 ? item.qty - 1 : 1; // Ensure qty doesn't go below 1
+                    const newQty = item.qty - 1 > 1 ? item.qty - 1 : 1; // Ensure qty doesn't go below 1
                     return {
                         ...item,
                         qty: newQty,
@@ -81,8 +81,9 @@ export const CartReducer = (state, action) => {
                 return item;
             });
 
-            updatedQty = totalQty - 1;
-            updatedPrice = totalPrice - shoppingCart.find(item => item.ProductID === action.id).ProductPrice;
+            const productPrice = shoppingCart.find(item => item.ProductID === action.id).ProductPrice;
+            updatedQty = totalQty > 1 ? totalQty - 1 : totalQty; // Prevent totalQty from going below 1
+            updatedPrice = totalPrice > productPrice ? totalPrice - productPrice : totalPrice; // Prevent totalPrice from going below 0
 
             return {
                 shoppingCart: updatedCart,

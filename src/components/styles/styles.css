@@ -483,10 +483,7 @@ p {
 
 /*ShopSection*/
 
-.products-grid{
-    display: flex;
-    flex-direction: row;
-}  
+
   .shop-button {
     display: inline-block;
     padding: 12px 24px;
@@ -722,3 +719,7 @@ p {
     color: #333;
   }
   
+  .products-grid{
+    display: flex;
+    flex-direction: row;
+}  

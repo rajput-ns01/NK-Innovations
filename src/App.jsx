@@ -24,7 +24,10 @@ import Cart from './components/shop/Cart';
 import CartProducts from './components/shop/CartProduct';
 import { Cashout } from './components/shop/Cashout';
 import ShopSection from './components/home/ShopSection';
-import CustomProductPage from './components/rawMaterials/CustomProductPage';
+import CustomizationPage from './components/customProducts/CustomizationPage';
+import { AddRawProduct } from './components/customProducts/AddRawProduct';
+import UploadForm from './components/customProducts/UploadForm';
+import Dashboard from './admin/dashboard/Dashboard';
 
 
 const Home = () => (
@@ -75,8 +78,14 @@ const App = () => {
             {/*<Route path="/shop" element={<AddProducts />} /> */}
             <Route path="/cart" element={<Cart user={currentUser} />} />
             <Route path="/shop/cartproducts" element={<CartProducts />} />
+            <Route path="/customize/cartproducts" element={<CartProducts />} />
             <Route path='/shop/cartproducts/cashout' element={<Cashout user={currentUser} />} />
-            <Route path="/custom-product" element={<CustomProductPage />} />
+            <Route path='/customize/cartproducts/cashout' element={<Cashout user={currentUser} />} />
+            <Route path="/customize" element={<CustomizationPage/>} />
+            <Route path="/upload" element={<UploadForm/>} />
+
+            {/*--------------Admin Part------------------*/}
+            <Route path='/admin' element={<Dashboard/>}/>
           </Routes>
         </Router>
         <Notification />

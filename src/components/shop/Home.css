@@ -75,6 +75,7 @@ h1 {
 
 .products-container {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -266,9 +267,7 @@ h1 {
     color: #38383881;
 }
 
-label{
-    background-color:rgba(45, 91, 101, 0.44);
-}
+
   
 .rightside .detail{
     padding-right: 20px;

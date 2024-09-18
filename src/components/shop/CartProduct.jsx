@@ -5,11 +5,57 @@ import { Icon } from 'react-icons-kit';
 import { ic_add } from 'react-icons-kit/md/ic_add';
 import { ic_remove } from 'react-icons-kit/md/ic_remove';
 import { iosTrashOutline } from 'react-icons-kit/ionicons/iosTrashOutline';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { productData } from '../../lib/data'; // Import productData
 import './Home.css';
 
 const Cart = ({ user }) => {
   const { shoppingCart, dispatch, totalPrice, totalQty } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  // Function to check if all required materials for the selected products are in the cart
+  const areAllMaterialsSelected = () => {
+    const requiredMaterials = new Set();
+    const selectedMaterials = new Set();
+
+    // Iterate over shoppingCart to gather selected materials and required materials
+    shoppingCart.forEach(item => {
+      const product = productData[item.category]?.find(p => p.name === item.ProductName);
+
+      if (product) {
+        // Add required materials for the product to the requiredMaterials set
+        product.materials.forEach(material => requiredMaterials.add(material));
+      }
+
+      // Add materials in cart to selectedMaterials set
+      if (item.materialName) {
+        selectedMaterials.add(item.materialName);
+      }
+    });
+
+    // Check if all required materials are selected
+    console.log('Required Materials:', [...requiredMaterials]);
+    console.log('Selected Materials:', [...selectedMaterials]);
+
+    return [...requiredMaterials].every(material => selectedMaterials.has(material));
+  };
+
+  // Handle checkout button click
+  const handleCheckout = () => {
+    if (areAllMaterialsSelected()) {
+      navigate('/customize/cartproducts/cashout');
+    } else {
+      toast.error('Please select all required materials before proceeding to checkout', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
+    }
+  };
 
   return (
     <>
@@ -56,11 +102,13 @@ const Cart = ({ user }) => {
                 <span>Total Qty</span>
                 <span>{totalQty}</span>
               </div>
-              <Link to='cashout' className='cashout-link'>
-                <button className='btn btn-success btn-md' style={{ marginTop: '5px' }}>
-                  Cash on delivery
-                </button>
-              </Link>
+              <button 
+                className='btn btn-success btn-md' 
+                style={{ marginTop: '5px' }} 
+                onClick={handleCheckout}
+              >
+                Cash on delivery
+              </button>
             </div>
           )}
         </div>
