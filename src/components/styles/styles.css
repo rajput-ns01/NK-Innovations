@@ -468,7 +468,10 @@ p {
     text-decoration: none;
     color: #000;
 }
-
+.products-grid{
+    display: flex;
+    flex-direction: row;
+}  
 @media (max-width: 768px) {
     .job-card {
         width: 100%;
@@ -719,7 +722,4 @@ p {
     color: #333;
   }
   
-  .products-grid{
-    display: flex;
-    flex-direction: row;
-}  
+  
