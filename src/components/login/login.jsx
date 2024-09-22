@@ -42,7 +42,7 @@ const Login = () => {
                 blocked: []
             });
 
-            toast.success("Account created! You can login now!");
+            navigate('/');
         } catch (err) {
             console.log(err);
             toast.error(err.message);

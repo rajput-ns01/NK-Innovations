@@ -41,7 +41,6 @@ export const Cashout = (props) => {
 
     const purchaseProduct = async (productId, purchaseQuantity, isCustomProduct) => {
         try {
-            // Handling ready-made product stock update
             if (!isCustomProduct) {
                 const productRef = doc(db, 'Products', productId);
                 const productDoc = await getDoc(productRef);
@@ -52,7 +51,7 @@ export const Cashout = (props) => {
                         await updateDoc(productRef, {
                             ProductStock: currentStock - purchaseQuantity,
                         });
-                        return 'ReadyMadeProductOrders';  // Store in ready-made products collection
+                        return 'ReadyMadeProductOrders';
                     } else {
                         console.warn('Insufficient stock in ReadyMadeProducts');
                         return false;
@@ -60,8 +59,7 @@ export const Cashout = (props) => {
                 }
             }
 
-            // Custom product orders don't involve stock checks as it's raw materials
-            return 'CustomizeProductOrders';  // Store in custom orders collection
+            return 'CustomizeProductOrders';
         } catch (err) {
             console.error('Error purchasing product: ', err);
             return false;
@@ -73,77 +71,78 @@ export const Cashout = (props) => {
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 const date = new Date();
-                const time = date.getTime();
-
-                const products = shoppingCart.map(product => ({
-                    ProductID: product.ProductID,
-                    ProductName: product.ProductName,
-                    ProductPrice: product.ProductPrice,
-                    qty: product.qty,
-                    TotalProductPrice: product.TotalProductPrice,
-                    isCustomProduct: product.isCustomProduct || false // Flag to determine product type
-                }));
-
-                let allSuccessful = true;
-
-                // ReadyMadeProducts or CustomizeProductOrders collection decision per product
-                let orderData = {
+                const orderData = {
                     BuyerName: name,
                     BuyerEmail: email,
                     BuyerCell: cell,
                     BuyerAddress: address,
                     BuyerPayment: totalPrice,
                     BuyerQuantity: totalQty,
-                    Products: [],
-                    Timestamp: time
+                    Timestamp: date.getTime(),
                 };
-
-                for (const product of products) {
+    
+                let allSuccessful = true;
+    
+                const readyMadeProducts = [];
+                const customProducts = [];
+    
+                for (const product of shoppingCart) {
                     const result = await purchaseProduct(product.ProductID, product.qty, product.isCustomProduct);
                     if (result === false) {
                         allSuccessful = false;
                         break;
                     }
-                    product.collection = result; // Store which collection this product belongs to
-                    orderData.Products.push(product);
+                    if (result === 'ReadyMadeProductOrders') {
+                        readyMadeProducts.push(product);
+                    } else {
+                        // Ensure category and materialName are defined
+                        const { category, materialName } = product; // Use materialName
+                        if (!category || !materialName) {
+                            console.error('Category or materialName is undefined:', product);
+                            allSuccessful = false;
+                            break;
+                        }
+                        customProducts.push({
+                            ...product,
+                            category, // Include category
+                            materialName, // Include materialName
+                        });
+                    }
                 }
-
+    
                 if (allSuccessful) {
-                    // Separate orders into two collections: ReadyMadeProducts and CustomizeProductOrders
-                    const readyMadeProducts = orderData.Products.filter(p => p.collection === 'ReadyMadeProductOrders');
-                    const customProducts = orderData.Products.filter(p => p.collection === 'CustomizeProductOrders');
-
-                    // Handle ReadyMadeProducts orders
                     if (readyMadeProducts.length > 0) {
-                        const readyMadeOrdersRef = collection(db, 'ReadyMadeProductOrders', user.uid, 'Orders');
+                        const readyMadeOrdersRef = collection(db, 'ReadyMadeProductOrders');
                         await addDoc(readyMadeOrdersRef, {
                             ...orderData,
-                            Products: readyMadeProducts
+                            UserID: user.uid,
+                            Products: readyMadeProducts,
                         });
                     }
-
-                    // Handle CustomizeProductOrders
+    
                     if (customProducts.length > 0) {
-                        const customOrdersRef = collection(db, 'CustomizeProductOrders', user.uid, 'Orders');
+                        const customOrdersRef = collection(db, 'CustomizeProductOrders');
+                        console.log('Custom Products:', customProducts); // Log the custom products
                         await addDoc(customOrdersRef, {
                             ...orderData,
-                            Products: customProducts
+                            UserID: user.uid,
+                            Products: customProducts,
                         });
                     }
-
+    
                     // Reset form, clear cart, and show success message
                     setCell('');
                     setAddress('');
                     dispatch({ type: 'EMPTY' });
-                    toast.success('Your order has been placed successfully. Thanks for visiting us. You will be redirected to the home page after 5 seconds', {
+                    toast.success('Your order has been placed successfully. Thanks for visiting us. You will be redirected to the home page after 5 seconds.', {
                         position: "top-right",
                         autoClose: 2000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: false,
                         draggable: false,
-                        progress: undefined,
                     });
+    
                     setTimeout(() => {
                         navigate('/');
                     }, 5000);
@@ -155,12 +154,14 @@ export const Cashout = (props) => {
                         closeOnClick: true,
                         pauseOnHover: false,
                         draggable: false,
-                        progress: undefined,
                     });
                 }
             }
         });
     };
+    
+    
+    
 
     return (
         <>
