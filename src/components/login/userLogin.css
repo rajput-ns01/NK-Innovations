@@ -1,0 +1,136 @@
+/* Container */
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+    padding: 20px;
+}
+
+/* Sign Up & Login Box */
+.signUpBox {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Headings */
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Form input styling */
+.loginBox {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease-in-out;
+}
+
+.loginBox:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.input {
+    display: block;
+}
+
+/* Submit Button */
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-family: 'Roboto', sans-serif;
+}
+
+.submitBtn:hover {
+    background-color: #0056b3;
+}
+
+.submitBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Image Upload Preview */
+.imagePreviewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.imagePreviewContainer:hover {
+    opacity: 0.8;
+}
+
+.profileImagePreview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #007bff;
+}
+
+/* Toggle Link */
+.signinLink {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.signinLink:hover {
+    color: #0056b3;
+}
+
+/* Footer Links */
+.loginFooter, .signUpFooter {
+    margin-top: 20px;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Responsiveness */
+@media (max-width: 480px) {
+    .signUpBox {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .loginBox, .submitBtn {
+        font-size: 14px;
+    }
+
+    .profileImagePreview {
+        width: 80px;
+        height: 80px;
+    }
+}
