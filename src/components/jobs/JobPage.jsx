@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage, db } from '../../lib/firebase'; // Adjust the import path as needed
+import { useUserStore } from '../../lib/userStore'; // Import your user store
 import './Description.css';
 
 const JobPage = () => {
@@ -11,9 +12,12 @@ const JobPage = () => {
   const jobTitle = params.get('title');
   const jobLocation = params.get('location');
 
+  const { currentUser } = useUserStore(); // Get current user from user store
+
   const [job, setJob] = useState(null); // State to store job details
   const [loading, setLoading] = useState(true); // State to handle loading
   const [resumeFile, setResumeFile] = useState(null);
+  console.log('Current User:', currentUser);
 
   // Fetch job details from Firestore based on jobTitle and jobLocation
   useEffect(() => {
@@ -51,6 +55,8 @@ const JobPage = () => {
       about: formData.get('about'),
       jobTitle: job?.title,
       jobLocation: job?.location,
+      userId: currentUser?.id, // Store the user ID
+      timestamp: serverTimestamp(), // Store the current timestamp
     };
 
     if (resumeFile) {

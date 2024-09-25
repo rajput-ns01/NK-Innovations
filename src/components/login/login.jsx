@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { auth, db } from "../../lib/firebase"; 
 import { doc, setDoc } from "firebase/firestore";
 import upload from "../../lib/upload";
+import { getDoc } from "firebase/firestore"; // Import getDoc
 import { useNavigate } from "react-router-dom"; 
 
 const Login = () => {
@@ -56,13 +57,13 @@ const Login = () => {
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password);
             const imgUrl = await upload(avatar.file);
-            await setDoc(doc(db, "users", res.user.uid), {
-                username,
-                email,
-                avatar: imgUrl,
-                id: res.user.uid,
-                blocked: []
-            });
+            const userData = { username, email, avatar: imgUrl, id: res.user.uid, blocked: [] };
+
+            // Store user info in Firestore
+            await setDoc(doc(db, "users", res.user.uid), userData);
+
+            // Store user info in localStorage
+            localStorage.setItem('user', JSON.stringify(userData));
 
             navigate('/');
         } catch (err) {
@@ -73,44 +74,59 @@ const Login = () => {
         }
     };
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setLoading(true);
 
-        const formData = new FormData(e.target);
-        const { email, password } = Object.fromEntries(formData);
+// ... other code
 
-        // Validations
-        if (!email || !password) {
-            toast.error("Please fill in all fields.");
-            setLoading(false);
-            return;
-        }
-        if (!validateEmail(email)) {
-            toast.error("Please enter a valid email.");
-            setLoading(false);
-            return;
-        }
-        if (password.length < 6) {
-            toast.error("Password should be at least 6 characters long.");
-            setLoading(false);
-            return;
-        }
+const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
+    const formData = new FormData(e.target);
+    const { email, password } = Object.fromEntries(formData);
+
+    // Validations
+    if (!email || !password) {
+        toast.error("Please fill in all fields.");
+        setLoading(false);
+        return;
+    }
+    if (!validateEmail(email)) {
+        toast.error("Please enter a valid email.");
+        setLoading(false);
+        return;
+    }
+    if (password.length < 6) {
+        toast.error("Password should be at least 6 characters long.");
+        setLoading(false);
+        return;
+    }
+
+    try {
+        const res = await signInWithEmailAndPassword(auth, email, password);
+        
+        // Fetch user info from Firestore and store it in localStorage
+        const userDocRef = doc(db, "users", res.user.uid); // Get the document reference
+        const userDoc = await getDoc(userDocRef); // Fetch the document data
+
+        if (userDoc.exists()) {
+            const userData = { id: res.user.uid, ...userDoc.data() }; // Access the data
+            localStorage.setItem('user', JSON.stringify(userData)); // Store it in localStorage
+
             if (email === "nirbhay@gmail.com") {
                 navigate("/admin");
             } else {
                 navigate("/");
             }
-        } catch (err) {
-            console.log(err);
-            toast.error(err.message);
-        } finally {
-            setLoading(false);
+        } else {
+            toast.error("User data not found.");
         }
-    };
+    } catch (err) {
+        console.log(err);
+        toast.error(err.message);
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
         <div className='loginContainer'>

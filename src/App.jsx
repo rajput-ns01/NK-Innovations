@@ -36,6 +36,8 @@ import JobApplications from './admin/dashboard/JobApplications';
 import ReadyMadeProductOrders from './admin/dashboard/ReadyMade';
 import CustomizeProductOrders from './admin/dashboard/CustomizeOrders';
 import AdminRoute from './admin/dashboard/AdminRoute';
+import InvoiceDetail from './admin/dashboard/InvoiceDetail';
+import UserDetails from './components/home/UserDetails';
 
 
 const Home = () => (
@@ -75,6 +77,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/user-details" element={<UserDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<ContactForm />} />
             <Route path="/solutions" element={<Solutions />} />
@@ -90,6 +93,7 @@ const App = () => {
             <Route path='/shop/cartproducts/cashout' element={<Cashout user={currentUser} />} />
             <Route path='/customize/cartproducts/cashout' element={<Cashout user={currentUser} />} />
             <Route path="/customize" element={<CustomizationPage/>} />
+
             {/*<Route path="/upload" element={<UploadForm/>} />*/}
 
             {/*--------------Admin Part------------------*/}
@@ -100,6 +104,7 @@ const App = () => {
             <Route path='/admin/products' element={<AdminRoute><ProductManagement /></AdminRoute>} />
             <Route path='/admin/jobs' element={<AdminRoute><JobManagement /></AdminRoute>} />
             <Route path='/admin/applications' element={<AdminRoute><JobApplications /></AdminRoute>} />
+            <Route path='/admin/customize/invoice-detail' element={<AdminRoute><InvoiceDetail /></AdminRoute>} />
           </Routes>
         </Router>
         <Notification />

@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import './dashboard.css';
+import { Button } from 'bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const CustomizeProductOrders = () => {
   const [orders, setOrders] = useState([]);
+  const navigate=useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -44,6 +47,7 @@ const CustomizeProductOrders = () => {
               <th>Products</th>
               <th>Order Timestamp</th>
               <th>User ID</th>
+              <th>Invoice</th>
             </tr>
           </thead>
           <tbody>
@@ -67,6 +71,7 @@ const CustomizeProductOrders = () => {
                 </td>
                 <td>{new Date(order.Timestamp).toLocaleString()}</td>
                 <td>{order.UserID}</td>
+                <td><button onClick={()=>{navigate('./invoice-detail',{state:order})}}>View</button></td>
               </tr>
             ))}
           </tbody>

@@ -723,3 +723,309 @@ p {
   }
   
   
+
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main container */
+.user-details {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* User information styling */
+.user-info {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.user-details .user-info img {
+    width: 120px; /* Fixed width for images */
+    height: 120px; /* Fixed height for images */
+    border-radius: 50%;
+    object-fit: cover; /* Ensures images maintain aspect ratio */
+    margin-bottom: 15px;
+}
+
+.user-info h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-info p {
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Orders and Applications Section */
+.orders-section,
+.applications-section,
+.receipt-section {
+    margin-bottom: 40px;
+}
+
+.orders-section h2,
+.applications-section h2,
+.receipt-section h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for headings */
+.orders-section h2:hover,
+.applications-section h2:hover,
+.receipt-section h2:hover {
+    color: #2980b9;
+}
+
+/* Order and application items */
+.order-item,
+.application-item {
+    padding: 15px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.order-item:hover,
+.application-item:hover {
+    background-color: #eaeaea;
+}
+
+/* Product and application lists */
+.product-list,
+.application-list {
+    list-style-type: none; /* Removes default list styling */
+    padding: 0;
+    margin: 0;
+}
+
+.product-item {
+    border-bottom: 1px solid #ddd; /* Separator line */
+    padding: 10px 0; /* Spacing for product items */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center align items */
+}
+
+.product-item img {
+    height: 50px; /* Image size for product items */
+    width: 50px;
+    border-radius: 10%; /* Slightly rounded corners */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Shadow effect for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effect */
+}
+
+.product-item img:hover {
+    transform: scale(1.1); /* Scale up on hover for emphasis */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* More pronounced shadow on hover */
+}
+
+.product-item,
+.application-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.product-item:last-child,
+.application-item:last-child {
+    border-bottom: none;
+}
+
+/* Receipt download link */
+.download-link {
+    text-decoration: none;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.download-link:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .user-details {
+        padding: 15px;
+    }
+
+    .user-info img {
+        width: 100px; /* Adjusted width for medium screens */
+        height: 100px; /* Adjusted height for medium screens */
+    }
+
+    .user-info h2 {
+        font-size: 22px;
+    }
+
+    .orders-section h2,
+    .applications-section h2,
+    .receipt-section h2 {
+        font-size: 21px;
+    }
+
+    .order-item,
+    .application-item {
+        padding: 12px;
+    }
+
+    .download-link {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-details {
+        padding: 10px;
+    }
+
+    .user-info img {
+        width: 90px; /* Adjusted width for smaller screens */
+        height: 90px; /* Adjusted height for smaller screens */
+    }
+
+    .user-info h2 {
+        font-size: 20px;
+    }
+
+    .orders-section h2,
+    .applications-section h2,
+    .receipt-section h2 {
+        font-size: 19px;
+    }
+
+    .order-item,
+    .application-item {
+        padding: 10px;
+    }
+
+    .download-link {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    /* Orders Section Styling */
+    .orders-section {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    /* Order item styling */
+    .order-item {
+        display: flex; /* Use flexbox for alignment */
+        flex-direction: row; /* Align items horizontally */
+        justify-content: space-between; /* Space items out */
+        align-items: center; /* Center align items vertically */
+    }
+
+    /* Responsive adjustments for order items */
+    @media (max-width: 768px) {
+        .order-item {
+            flex-direction: column; /* Stack order items on smaller screens */
+            align-items: flex-start; /* Align items to the start */
+            padding: 8px; /* Reduced padding for smaller screens */
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .user-info h2,
+    .orders-section h2,
+    .applications-section h2,
+    .receipt-section h2 {
+        font-size: 18px;
+    }
+
+    .user-info img {
+        width: 80px; /* Further adjusted for extra small screens */
+        height: 80px; /* Further adjusted for extra small screens */
+    }
+
+    .download-link {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .product-item {
+        padding: 8px 0; /* Reduced padding for smaller screens */
+    }
+
+    .product-item img {
+        height: 40px; /* Smaller image size for extra small screens */
+        width: 40px;
+    }
+
+    /* Further responsive adjustments for order items */
+    .order-item {
+        padding: 8px; /* Reduced padding for smaller screens */
+    }
+
+    .order-item img {
+        height: 40px; /* Adjust image size for smaller screens */
+        width: 40px; 
+    }
+
+    .order-item .order-details {
+        font-size: 14px; /* Adjust font size for details */
+    }
+
+    .order-item .order-price {
+        font-size: 14px; /* Adjust font size for price */
+    }
+}
+
+/* Order details and price styles */
+.order-details {
+    flex: 1; /* Allow this to take remaining space */
+    margin-right: 10px; /* Space between details and price */
+}
+
+.order-price {
+    font-weight: bold; /* Emphasize the price */
+    color: #333; /* Ensure price color stands out */
+}
+
+/* Add hover effect for order items */
+.order-item:hover {
+    background-color: #eaeaea; /* Change background color on hover */
+}
+
+/* Adjusting font sizes for order headings */
+.orders-section h2 {
+    font-size: 22px; /* Base font size */
+    margin-bottom: 15px;
+}
+
+/* Responsive adjustments for orders section heading */
+@media (max-width: 768px) {
+    .orders-section h2 {
+        font-size: 20px; /* Reduce font size on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .orders-section h2 {
+        font-size: 18px; /* Further reduce font size on small screens */
+    }
+}
