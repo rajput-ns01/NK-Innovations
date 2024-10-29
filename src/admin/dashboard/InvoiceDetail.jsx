@@ -34,7 +34,7 @@ const InvoiceDetail = () => {
 
                 // Save the PDF to a Blob and upload it
                 const pdfBlob = pdf.output('blob');
-
+                console.log(data.id)
                 // Create a reference to Firebase Storage in the "invoices" folder using only the user's ID as the filename
                 const receiptRef = ref(storage, `invoices/${data.UserID}.pdf`);
 

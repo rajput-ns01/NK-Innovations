@@ -15,13 +15,14 @@ const UserDetails = () => {
     const [jobApplications, setJobApplications] = useState([]);
     const [receiptURL, setReceiptURL] = useState(null);
     const [activeSection, setActiveSection] = useState(null); // State to control which section is open
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const navigate=useNavigate();
 
     useEffect(() => {
         const fetchCustomizedOrders = async () => {
             if (currentUser) {
-                const q = query(collection(db, 'CustomizeProductOrders'));
+                const q = query(collection(db, 'CustomizeProductOrders'),where('UserID','==',user.id));
                 const snapshot = await getDocs(q);
                 setCustomizedOrders(snapshot.docs.map(doc => doc.data()));
             }
@@ -29,7 +30,7 @@ const UserDetails = () => {
 
         const fetchReadyMadeOrders = async () => {
             if (currentUser) {
-                const q = query(collection(db, 'ReadyMadeProductOrders'));
+                const q = query(collection(db, 'ReadyMadeProductOrders'),where('UserID','==',user.id));
                 const snapshot = await getDocs(q);
                 setReadyMadeOrders(snapshot.docs.map(doc => doc.data()));
             }
@@ -46,7 +47,7 @@ const UserDetails = () => {
         const fetchInvoiceReceipt = async () => {
             if (currentUser) {
                 const storage = getStorage();
-                const receiptRef = ref(storage, `invoices/${currentUser.id}.pdf`);
+                const receiptRef = ref(storage, `invoices/${user.id}.pdf`);
 
                 try {
                     const url = await getDownloadURL(receiptRef);

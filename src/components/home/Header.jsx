@@ -39,20 +39,12 @@ const Header = () => {
       </div>
       <nav>
         <ul className="nav-links">
-          <li><Link to="/about">about</Link></li>
-          <li><Link to="/solutions">solutions</Link></li>
-          <li><Link to="/contact">contact</Link></li>
-          <li><Link to="/JobSearch">career</Link></li>
-          <li><Link to="/customize">customize</Link></li>
-          <li><Link to="/shop">shop</Link></li>
-          <li onClick={handleUserClick} style={{ cursor: 'pointer' }}>
-            <div className="detail">
-              <div className="user">
-                <img src={currentUser?.avatar || "./avatar.png"} alt={currentUser?.username || "User Avatar"} />
-                <h2>{currentUser?.username || "Your Name"}</h2>
-              </div>
-            </div>
-          </li>
+          <li><Link to="/about">ABOUT</Link></li>
+          <li><Link to="/solutions">SOLUTIONS</Link></li>
+          <li><Link to="/contact">CONTACT</Link></li>
+          <li><Link to="/JobSearch">CAREER</Link></li>
+          <li><Link to="/customize">CUSTOMIZE</Link></li>
+          <li><Link to="/shop">SHOP</Link></li>
           {/* Render login option based on user authentication state */}
           {!currentUser && (
             <li>
@@ -61,8 +53,19 @@ const Header = () => {
               </Link>
             </li>
           )}
+          <li onClick={handleUserClick} style={{ cursor: 'pointer' }}>
+            <div className="detail separate-detail">
+              <div className="user">
+                <img src={currentUser?.avatar || "./avatar.png"} alt={currentUser?.username || "User Avatar"} />
+                <h2 style={{color:'cyan'}}>{currentUser?.username || "Your Name"}</h2>
+              </div>
+            </div>
+          </li>
+          
+
         </ul>
       </nav>
+      
       <div className="menu-toggle" onClick={toggleDropdown}>
         <FontAwesomeIcon icon={faBars} />
       </div>
@@ -70,18 +73,18 @@ const Header = () => {
         <ul>
           <li onClick={handleUserClick} style={{ cursor: 'pointer' }}>
             <div className="detail">
-              <div className="user">
+              <div className="user user1">
                 <img src={currentUser?.avatar || "./avatar.png"} alt={currentUser?.username || "User Avatar"} />
-                <h2>{currentUser?.username || "Your Name"}</h2>
+                <h2 style={{color:'cyan'}}>{currentUser?.username || "Your Name"}</h2>
               </div>
             </div>
           </li>
-          <li><Link to="/about">about</Link></li>
-          <li><Link to="/solutions">solutions</Link></li>
-          <li><Link to="/contact">contact</Link></li>
-          <li><Link to="/JobSearch">career</Link></li>
-          <li><Link to="/customize">customize</Link></li>
-          <li><Link to="/shop">shop</Link></li>
+          <li><Link to="/about">ABOUT</Link></li>
+          <li><Link to="/solutions">SOLUTIONS</Link></li>
+          <li><Link to="/contact">CONTACT</Link></li>
+          <li><Link to="/JobSearch">CAREER</Link></li>
+          <li><Link to="/customize">CUSTOMIZE</Link></li>
+          <li><Link to="/shop">SHOP</Link></li>
           {/* Render login option in the dropdown menu */}
           {!currentUser && (
             <li>
