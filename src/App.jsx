@@ -84,7 +84,6 @@ const App = () => {
             <Route path="/jobsearch" element={<JobSearch />} />
             <Route path="/job" element={<JobPage />} />
             <Route path="/login" element={<Login />} />
-            {/* Uncomment and choose one route for shop */}
             <Route path="/shop" element={<ShopHome />} /> 
             {/*<Route path="/shop" element={<AddProducts />} /> */}
             <Route path="/cart" element={<Cart user={currentUser} />} />

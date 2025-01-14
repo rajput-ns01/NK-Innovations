@@ -19,6 +19,7 @@ export const NavBar = () => {
             <div className="leftside">
                 <img src={logo} alt=''/>
             </div>
+            <div className='cart-container' style={{justifyContent:'space-around'}}><Link to="/">Return to Home page</Link></div>
             <div className="rightside">
             <div className="detail">
               <div className="user">

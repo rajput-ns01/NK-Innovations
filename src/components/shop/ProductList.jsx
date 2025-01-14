@@ -4,11 +4,13 @@ import { db } from '../../lib/firebase';
 import './Home.css';
 import { CartContext } from './CartContext';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { dispatch } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const addToCart = (product) => {
     dispatch({ type: 'ADD_TO_CART', id: product.ProductID, product });
@@ -23,6 +25,14 @@ const Products = () => {
       draggable: false,
       progress: undefined,
     });
+  };
+
+  const buyNow = (product) => {
+    // Add product to cart
+    addToCart(product);
+
+    // Redirect to the cart page
+    navigate('/shop/cartproducts');
   };
 
   useEffect(() => {
@@ -72,7 +82,10 @@ const Products = () => {
             <div className='product-stock'>
               Available Stock: {product.ProductStock}
             </div>
-            <button className='addcart-btn' onClick={() => addToCart(product)}>ADD TO CART</button>
+            <div className="button-group">
+              <button className='addcart-btn' onClick={() => addToCart(product)}>ADD TO CART</button>
+              <button className='addcart-btn' style={{backgroundColor:'#4CAF50'}} onClick={() => buyNow(product)}>BUY NOW</button>
+            </div>
           </div>
         ))}
       </div>

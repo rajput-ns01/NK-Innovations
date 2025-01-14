@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { NavBar } from './NavBar';
-
 import './Home.css';
 import ProductList from './ProductList';
 

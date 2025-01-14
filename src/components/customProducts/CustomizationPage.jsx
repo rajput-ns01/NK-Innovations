@@ -178,7 +178,7 @@ const CustomizationPage = () => {
                   <h3>{product.ProductName}</h3>
                   <p><strong>Price:</strong> {product.ProductPrice}</p>
                   <p><strong>Stock:</strong> {product.ProductStock}</p>
-                  <button onClick={() => addToCart(product)}>Add to Cart</button>
+                  <button className='btn' onClick={() => addToCart(product)}>Add to Cart</button>
                 </div>
               ))}
             </div>

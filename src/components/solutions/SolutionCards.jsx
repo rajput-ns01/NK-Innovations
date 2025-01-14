@@ -8,7 +8,6 @@ import Header from '../home/Header';
 import Footer from '../home/Footer';
 import { Link } from 'react-router-dom'; 
 
-
 const Solutions = () => {
     return (
         <div>
@@ -16,59 +15,59 @@ const Solutions = () => {
             <div className="container2">
                 <Card
                     imgSrc={solution1}
-                    altText="Robotics Automation Icon"
-                    title="Robotics Automation"
-                    subtitle="Comprehensive Automation Solutions"
-                    whoFor="Businesses seeking to automate repetitive tasks and enhance operational efficiency through robotics."
-                    whatFor="Our robotics automation solutions streamline your workflow, reduce human error, and increase productivity. We provide tailored automation systems to fit your specific business needs."
+                    altText="Customized Robotics Products Icon"
+                    title="Customized Robotics Products"
+                    subtitle="Tailored Solutions for Unique Needs"
+                    whoFor="Industries and individuals seeking personalized robotic products for specific applications."
+                    whatFor="We specialize in customizing robotics products such as robotic arms, autonomous vehicles, and service robots to meet your unique requirements."
                     included={[
-                        "Customized robotic systems",
-                        "Integration with existing workflows",
-                        "Ongoing maintenance and support",
-                        "Training for your staff",
-                        "Access to cutting-edge automation technology"
+                        "Robotic Arms (Industrial, Collaborative)",
+                        "Autonomous Vehicles (Drones, AGVs, Autonomous Cars)",
+                        "Service Robots (Healthcare, Domestic, Hospitality)",
+                        "Educational Robots (STEM kits, Competition Robots)",
+                        "Exploration Robots (Space, Underwater, Military)"
                     ]}
-                    payment="Flexible payment plans based on project scope and requirements."
+                    payment="Pricing based on customization level and project scope."
                 />
 
                 <Card
                     imgSrc={solution2}
-                    altText="AI-Powered Robotics Icon"
-                    title="AI-Powered Robotics"
-                    subtitle="Intelligent Robotics Solutions"
-                    whoFor="Organizations looking to implement advanced AI-driven robotics for complex problem-solving and decision-making tasks."
-                    whatFor="Our AI-powered robotics solutions leverage artificial intelligence to perform complex tasks with precision and adaptability. From healthcare to manufacturing, we offer intelligent solutions to meet your industry's demands."
+                    altText="Ready-Made Robotics Products Icon"
+                    title="Ready-Made Robotics Products"
+                    subtitle="Pre-Built Solutions for Quick Implementation"
+                    whoFor="Businesses and individuals looking for high-quality, ready-to-use robotics products."
+                    whatFor="We offer a range of ready-made robotics products including motors, sensors, controllers, and fully assembled robots. Perfect for those who need reliable solutions without customization."
                     included={[
-                        "AI integration with robotic systems",
-                        "Real-time data analysis and decision-making",
-                        "Custom solutions for specific industry needs",
-                        "Comprehensive training and support",
-                        "Access to the latest AI technologies"
+                        "Motors and Actuators",
+                        "Sensors for Various Applications",
+                        "Controllers (Standard and Advanced)",
+                        "Pre-Assembled Robotic Kits",
+                        "User Manuals and Support"
                     ]}
-                    payment="Customized pricing based on AI solution complexity and implementation scale."
+                    payment="Competitive pricing with bulk discounts available."
                 />
 
                 <Card
                     imgSrc={solution3}
-                    altText="Collaborative Robotics Icon"
-                    title="Collaborative Robotics"
-                    subtitle="Robotics for Team Collaboration"
-                    whoFor="Businesses looking to enhance human-robot collaboration in the workplace for improved safety and productivity."
-                    whatFor="Our collaborative robotics solutions enable robots to work safely alongside human workers. These systems are designed to enhance teamwork, improve safety, and boost productivity in various industrial and service settings."
+                    altText="Support and Maintenance Icon"
+                    title="Support and Maintenance"
+                    subtitle="Ensuring Optimal Performance"
+                    whoFor="Clients who want to maintain and optimize their robotic systems."
+                    whatFor="Our dedicated support team ensures your robotics systems operate at peak performance with regular maintenance, updates, and troubleshooting."
                     included={[
-                        "Human-robot interaction design",
-                        "Safety and compliance features",
-                        "Custom integration with existing workflows",
-                        "Ongoing support and maintenance",
-                        "Training programs for employees"
+                        "Routine Maintenance Services",
+                        "On-Demand Troubleshooting",
+                        "Hardware and Software Upgrades",
+                        "Comprehensive Training Programs",
+                        "24/7 Customer Support"
                     ]}
-                    payment="Tailored pricing plans based on the level of integration and support required."
+                    payment="Flexible service contracts based on your requirements."
                 />
             </div>
             <div className="contact-section">
                 <div className="contact-content">
                     <h2>Contact Us</h2>
-                    <p>Have questions about our robotics solutions or want to discuss your project needs? Reach out to us!</p>
+                    <p>Have questions about our solutions or want to discuss your project needs? Reach out to us!</p>
                     <Link to="/contact" className="contact-button">Get in Touch</Link>
                 </div>
             </div>

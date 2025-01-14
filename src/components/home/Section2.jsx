@@ -6,44 +6,44 @@ const Section2 = () => {
     <section className="section2">
       <div className="header">
         <h1>What We Do</h1>
-        <p>Operating in both the UK and US robotics markets, we provide cutting-edge robotics solutions with expertise in automation, AI-driven robotics, and collaborative robotics. Our passion and expertise ensure we deliver tailored robotic solutions to meet your business needs.</p>
+        <p>At NK Innovations, we specialize in both customizing robotic solutions to fit your specific business needs and offering a wide range of ready-made robotic products for immediate deployment. Whether you're looking for advanced automation, AI-powered robotics, or collaborative solutions, we provide cutting-edge technology to enhance productivity and operational efficiency.</p>
       </div>
       <div className="card-container">
         <DataCard
           icon="🤖"
-          title="Advanced Robotics Solutions"
-          frontContent="Our advanced robotics solutions integrate AI and automation to optimize manufacturing processes, improve operational efficiency, and enhance workplace safety."
-          backContent="Robotics Engineer, Robotics Process Automation (RPA) Developer, Automation Specialist, Robotics Software Engineer"
+          title="Custom Robotics Solutions"
+          frontContent="We design and develop customized robotic systems tailored to your unique business needs, optimizing operations and improving efficiency."
+          backContent="Robotics Engineer, Robotics Process Automation (RPA) Developer, Automation Specialist"
         />
         <DataCard
           icon="🚀"
           title="AI-Powered Robotics"
-          frontContent="Using artificial intelligence, our robotics solutions enable autonomous decision-making, adaptive learning, and real-time data analysis to tackle complex industrial challenges."
-          backContent="AI/Machine Learning Engineer, AI Robotics Specialist, Robotics AI Research Scientist, Deep Learning Engineer"
+          frontContent="Our AI-driven robotics solutions enable autonomous decision-making and adaptive learning to address complex industrial challenges."
+          backContent="AI/Machine Learning Engineer, Robotics AI Specialist, Deep Learning Engineer"
         />
         <DataCard
           icon="🔧"
-          title="Collaborative Robotics"
-          frontContent="Our collaborative robotics solutions focus on human-robot interaction to improve productivity, flexibility, and safety in dynamic manufacturing environments."
-          backContent="Collaborative Robotics Engineer, Human-Robot Interaction Specialist, Robotics Integration Engineer"
+          title="Ready-Made Collaborative Robotics"
+          frontContent="We offer ready-made collaborative robotics products designed to seamlessly integrate into your operations, improving productivity and flexibility."
+          backContent="Collaborative Robotics Engineer, Robotics Integration Specialist"
         />
         <DataCard
           icon="📈"
-          title="Robotics Process Automation"
-          frontContent="Automating routine tasks through robotics process automation (RPA) to streamline workflows and increase operational efficiency in various industries."
-          backContent="RPA Developer, Automation Analyst, Process Automation Specialist, Robotic Process Engineer"
+          title="Robotics Process Automation (RPA)"
+          frontContent="Our RPA solutions automate repetitive tasks, streamlining workflows and boosting operational efficiency across various industries."
+          backContent="RPA Developer, Automation Analyst, Robotics Process Engineer"
         />
         <DataCard
           icon="🛠️"
-          title="Robotics Engineering & Development"
-          frontContent="Designing and developing customized robotics solutions tailored to specific business needs, from concept to deployment and ongoing support."
-          backContent="Robotics Engineer, Robotics Systems Developer, Robotics Software Architect, Robotics Project Manager"
+          title="Ready-Made Robotics Engineering"
+          frontContent="Our pre-designed robotics products are ready to deploy, offering effective solutions for a range of industries."
+          backContent="Robotics Systems Developer, Robotics Project Manager"
         />
         <DataCard
           icon="🔐"
           title="Robotics Security & Compliance"
-          frontContent="Ensuring robust security measures and regulatory compliance in robotics solutions to protect data integrity and maintain operational continuity."
-          backContent="Robotics Security Specialist, Compliance Engineer, Robotics Data Protection Officer"
+          frontContent="We ensure that all our robotics systems meet the highest security standards and regulatory requirements, protecting your data and business."
+          backContent="Robotics Security Specialist, Compliance Engineer"
         />
       </div>
     </section>
