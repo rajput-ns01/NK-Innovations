@@ -3,10 +3,10 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { productData } from '../../lib/data';
 import './CustomizationPage.css';
-import NavBar from '../shop/NavBar';
 import { CartContext } from '../shop/CartContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'; // Updated import
+import NavBar from '../shop/NavBar';
 
 const CustomizationPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');

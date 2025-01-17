@@ -15,6 +15,8 @@ export const Cashout = (props) => {
     const [cell, setCell] = useState('');
     const [address, setAddress] = useState('');
     const [error, setError] = useState('');
+    const [cellError, setCellError] = useState('');
+    const [addressError, setAddressError] = useState('');
 
     useEffect(() => {
         const fetchUserData = async (user) => {
@@ -38,6 +40,32 @@ export const Cashout = (props) => {
 
         return () => unsubscribe();
     }, [navigate]);
+
+    const validateInputs = () => {
+        let isValid = true;
+
+        // Validate cell number (Pakistan-specific)
+        const cellRegex = /^[6-9][0-9]{9}$/;;
+        if (!cellRegex.test(cell)) {
+            setCellError('Please enter a valid cell number (e.g., 03123456789).');
+            isValid = false;
+        } else {
+            setCellError('');
+        }
+
+        // Validate address
+        if (!address.trim()) {
+            setAddressError('Address cannot be empty.');
+            isValid = false;
+        } else if (address.length < 10) {
+            setAddressError('Address should be at least 10 characters long.');
+            isValid = false;
+        } else {
+            setAddressError('');
+        }
+
+        return isValid;
+    };
 
     const purchaseProduct = async (productId, purchaseQuantity, isCustomProduct) => {
         try {
@@ -68,6 +96,8 @@ export const Cashout = (props) => {
 
     const cashoutSubmit = async (e) => {
         e.preventDefault();
+        if (!validateInputs()) return;
+
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 const date = new Date();
@@ -80,12 +110,12 @@ export const Cashout = (props) => {
                     BuyerQuantity: totalQty,
                     Timestamp: date.getTime(),
                 };
-    
+
                 let allSuccessful = true;
-    
+
                 const readyMadeProducts = [];
                 const customProducts = [];
-    
+
                 for (const product of shoppingCart) {
                     const result = await purchaseProduct(product.ProductID, product.qty, product.isCustomProduct);
                     if (result === false) {
@@ -95,8 +125,7 @@ export const Cashout = (props) => {
                     if (result === 'ReadyMadeProductOrders') {
                         readyMadeProducts.push(product);
                     } else {
-                        // Ensure category and materialName are defined
-                        const { category, materialName } = product; // Use materialName
+                        const { category, materialName } = product;
                         if (!category || !materialName) {
                             console.error('Category or materialName is undefined:', product);
                             allSuccessful = false;
@@ -104,12 +133,12 @@ export const Cashout = (props) => {
                         }
                         customProducts.push({
                             ...product,
-                            category, // Include category
-                            materialName, // Include materialName
+                            category,
+                            materialName,
                         });
                     }
                 }
-    
+
                 if (allSuccessful) {
                     if (readyMadeProducts.length > 0) {
                         const readyMadeOrdersRef = collection(db, 'ReadyMadeProductOrders');
@@ -119,52 +148,37 @@ export const Cashout = (props) => {
                             Products: readyMadeProducts,
                         });
                     }
-    
+
                     if (customProducts.length > 0) {
                         const customOrdersRef = collection(db, 'CustomizeProductOrders');
-                        console.log('Custom Products:', customProducts); // Log the custom products
                         await addDoc(customOrdersRef, {
                             ...orderData,
                             UserID: user.uid,
                             Products: customProducts,
                         });
                     }
-    
-                    // Reset form, clear cart, and show success message
+
                     setCell('');
                     setAddress('');
                     dispatch({ type: 'EMPTY' });
-                    toast.success('Your order has been placed successfully. Thanks for visiting us. You will be redirected to the home page after 5 seconds.', {
+                    toast.success('Your order has been placed successfully. Redirecting to the home page.', {
                         position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: false,
+                        autoClose: 5000,
                     });
-    
-                    setTimeout(() => {
-                        navigate('/');
-                    }, 5000);
+
+                    setTimeout(() => navigate('/'), 5000);
                 } else {
                     toast.error('Some items in your cart are out of stock.', {
                         position: "top-right",
                         autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: false,
                     });
                 }
             }
         });
     };
-    
-    
-    
 
     return (
-        <>
+        <div className='cashout'>
             <NavBar user={props.user} />
             <div className='container mt-4'>
                 <h2 className='text-center mb-4'>Cashout Details</h2>
@@ -180,11 +194,26 @@ export const Cashout = (props) => {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="cellNo" className='form-label'>Cell No</label>
-                        <input type="number" className='form-control' required placeholder='e.g. 03123456789' value={cell} onChange={(e) => setCell(e.target.value)} />
+                        <input
+                            type="number"
+                            className={`form-control ${cellError ? 'is-invalid' : ''}`}
+                            required
+                            placeholder='e.g. 03123456789'
+                            value={cell}
+                            onChange={(e) => setCell(e.target.value)}
+                        />
+                        {cellError && <div className="invalid-feedback">{cellError}</div>}
                     </div>
                     <div className="mb-3">
                         <label htmlFor="deliveryAddress" className='form-label'>Delivery Address</label>
-                        <input type="text" className='form-control' required value={address} onChange={(e) => setAddress(e.target.value)} />
+                        <input
+                            type="text"
+                            className={`form-control ${addressError ? 'is-invalid' : ''}`}
+                            required
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
+                        {addressError && <div className="invalid-feedback">{addressError}</div>}
                     </div>
                     <div className="mb-3">
                         <label htmlFor="priceToPay" className='form-label'>Price To Pay</label>
@@ -197,6 +226,6 @@ export const Cashout = (props) => {
                     <button type="submit" className='btn btn-success btn-md mybtn'>SUBMIT</button>
                 </form>
             </div>
-        </>
+        </div>
     );
 };

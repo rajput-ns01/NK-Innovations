@@ -82,7 +82,10 @@ nav ul li a {
 .logout:hover{
     background-color: red;
 }
-
+.sec1{
+    display: flex;
+    align-items: center;
+}
 /* Main section styles */
 main {
     position: relative;

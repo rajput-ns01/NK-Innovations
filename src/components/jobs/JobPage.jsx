@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { collection, query, where, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage, db } from '../../lib/firebase'; // Adjust the import path as needed
 import { useUserStore } from '../../lib/userStore'; // Import your user store
 import './Description.css';
+
+import React, { useState, useEffect, useRef } from 'react';
 
 const JobPage = () => {
   const location = useLocation();
@@ -17,7 +18,7 @@ const JobPage = () => {
   const [job, setJob] = useState(null); // State to store job details
   const [loading, setLoading] = useState(true); // State to handle loading
   const [resumeFile, setResumeFile] = useState(null);
-  console.log('Current User:', currentUser);
+  const formRef = useRef(null); // Ref for the form
 
   // Fetch job details from Firestore based on jobTitle and jobLocation
   useEffect(() => {
@@ -70,6 +71,8 @@ const JobPage = () => {
       const docRef = await addDoc(collection(db, 'applicants'), applicantData);
       console.log('Document written with ID:', docRef.id);
       alert('Application submitted successfully!');
+      formRef.current.reset(); // Reset the form
+      setResumeFile(null); // Clear the resume file state
     } catch (e) {
       console.error('Error adding document:', e);
       alert('There was an error submitting your application.');
@@ -102,7 +105,7 @@ const JobPage = () => {
       </div>
       <div className="apply-section">
         <div className="apply-now">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} ref={formRef}>
             <input type="text" name="first_name" placeholder="First Name *" required />
             <input type="text" name="last_name" placeholder="Last Name *" required />
             <input type="email" name="email" placeholder="Email Address *" required />
@@ -119,3 +122,4 @@ const JobPage = () => {
 };
 
 export default JobPage;
+
