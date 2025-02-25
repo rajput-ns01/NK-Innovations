@@ -6,7 +6,7 @@ import { useUserStore } from '../../lib/userStore'; // assuming you store user i
 const AdminRoute = ({ children }) => {
     const { currentUser } = useUserStore();
 
-    if (!currentUser || currentUser.email !== 'nirbhay@gmail.com') {
+    if (!currentUser || currentUser.email !== 'nirbhay12@gmail.com') {
         // If not logged in or not the admin, redirect to home or login
         return <Navigate to="/login" />;
     }

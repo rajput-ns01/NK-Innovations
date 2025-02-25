@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase'; // Import Firestore instance
 import { collection, addDoc, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore"; // Import Firestore functions
+import Header from './Header';
+import Sidebar from './SideBar';
 
 const JobManagement = () => {
   const [showForm, setShowForm] = useState(false);
@@ -98,9 +100,17 @@ const JobManagement = () => {
   };
 
   return (
+    <div className="admin-dashboard">
+      <Sidebar />
+      <div className="main-content">
+        <Header />
+        <div className="dashboard-section">
+          {/* Render the different sections based on route */}
+          {/* Add other components such as OrderManagement, ProductManagement */}
+        
     <div className="job-management">
       <h2>Job Listings Management</h2>
-      <button onClick={() => {
+      <button className='admin-button' onClick={() => {
         setShowForm(!showForm);
         setEditingJobId(null); // Reset editing mode if adding a new job
       }}>
@@ -158,7 +168,7 @@ const JobManagement = () => {
               required
             />
           </div>
-          <button type="submit">{editingJobId ? 'Update Job' : 'Submit Job'}</button>
+          <button className='admin-button' type="submit">{editingJobId ? 'Update Job' : 'Submit Job'}</button>
         </form>
       )}
 
@@ -181,8 +191,8 @@ const JobManagement = () => {
                 <td>{job.location}</td>
                 <td>{job.salary}</td>
                 <td>
-                  <button onClick={() => handleEdit(job)}>Edit</button>
-                  <button onClick={() => handleDelete(job.id)}>Delete</button>
+                  <button className='admin-button' onClick={() => handleEdit(job)}>Edit</button>
+                  <button className='admin-button delete-admin' onClick={() => handleDelete(job.id)}>Delete</button>
                 </td>
               </tr>
             ))
@@ -193,6 +203,9 @@ const JobManagement = () => {
           )}
         </tbody>
       </table>
+    </div>
+    </div>
+      </div>
     </div>
   );
 };

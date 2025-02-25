@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../../lib/firebase'; // Adjust the import based on your Firebase configuration
 import { collection, getDocs } from 'firebase/firestore';
 import './dashboard.css';
+import Sidebar from './SideBar';
+import Header from './Header';
 
 const ReadyMadeProductOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -26,6 +28,15 @@ const ReadyMadeProductOrders = () => {
   }, []);
 
   return (
+    <div className="admin-dashboard">
+      <Sidebar />
+      <div className="main-content">
+        <Header />
+        <div className="dashboard-section">
+          {/* Render the different sections based on route */}
+          
+          {/* Add other components such as OrderManagement, ProductManagement */}
+        
     <div className="orders-container1">
       <h2>Ready-Made Product Orders</h2>
       {orders.length === 0 ? (
@@ -70,6 +81,9 @@ const ReadyMadeProductOrders = () => {
           </tbody>
         </table>
       )}
+    </div>
+    </div>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './SideBar';
 import Header from './Header';
 import UserManagement from './UserManagement'; // Import other sections as needed
+import JobApplications from './JobApplications';
 
 const AdminDashboard = () => {
   return (

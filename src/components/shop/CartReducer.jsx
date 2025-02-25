@@ -69,39 +69,47 @@ export const CartReducer = (state, action) => {
             };
 
         case 'DEC':
-            updatedCart = shoppingCart.map(item => {
-                if (item.ProductID === action.id) {
-                    const newQty = item.qty - 1 > 1 ? item.qty - 1 : 1; // Ensure qty doesn't go below 1
-                    return {
-                        ...item,
-                        qty: newQty,
-                        TotalProductPrice: newQty * item.ProductPrice
-                    };
-                }
-                return item;
-            });
+            const existingProduct = shoppingCart.find(item => item.ProductID === action.id);
+            if (!existingProduct) return state; // Prevent errors if product not found
 
-            const productPrice = shoppingCart.find(item => item.ProductID === action.id).ProductPrice;
-            updatedQty = totalQty > 1 ? totalQty - 1 : totalQty; // Prevent totalQty from going below 1
-            updatedPrice = totalPrice > productPrice ? totalPrice - productPrice : totalPrice; // Prevent totalPrice from going below 0
+            if (existingProduct.qty === 1) {
+                // Remove item if qty reaches 0
+                updatedCart = shoppingCart.filter(item => item.ProductID !== action.id);
+                updatedQty = totalQty - 1;
+                updatedPrice = totalPrice - existingProduct.ProductPrice;
+            } else {
+                // Decrease quantity
+                updatedCart = shoppingCart.map(item =>
+                    item.ProductID === action.id
+                        ? {
+                              ...item,
+                              qty: item.qty - 1,
+                              TotalProductPrice: (item.qty - 1) * item.ProductPrice
+                          }
+                        : item
+                );
+                updatedQty = totalQty - 1;
+                updatedPrice = totalPrice - existingProduct.ProductPrice;
+            }
 
             return {
                 shoppingCart: updatedCart,
-                totalPrice: updatedPrice,
-                totalQty: updatedQty
+                totalPrice: updatedPrice > 0 ? updatedPrice : 0, // Ensure price is never negative
+                totalQty: updatedQty > 0 ? updatedQty : 0 // Ensure quantity is never negative
             };
 
         case 'DELETE':
-            const filteredCart = shoppingCart.filter(item => item.ProductID !== action.id);
             const deletedProduct = shoppingCart.find(item => item.ProductID === action.id);
+            if (!deletedProduct) return state; // Prevents errors if product is not found
 
+            updatedCart = shoppingCart.filter(item => item.ProductID !== action.id);
             updatedQty = totalQty - deletedProduct.qty;
             updatedPrice = totalPrice - deletedProduct.qty * deletedProduct.ProductPrice;
 
             return {
-                shoppingCart: filteredCart,
-                totalPrice: updatedPrice,
-                totalQty: updatedQty
+                shoppingCart: updatedCart,
+                totalPrice: updatedPrice > 0 ? updatedPrice : 0,
+                totalQty: updatedQty > 0 ? updatedQty : 0
             };
 
         case 'EMPTY':

@@ -20,7 +20,7 @@ const Sidebar = () => {
       <h2>Admin Dashboard</h2>
       <ul>
         <li>
-          <button onClick={handleLogout}>Logout</button>
+          <button className='admin-button' onClick={handleLogout}>Logout</button>
         </li>
         <li><Link to="/admin/users">User Management</Link></li>
         <li><Link to="/admin/readymade">ReadyMade Product Orders</Link></li>

@@ -1,32 +1,24 @@
 import "./userLogin.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from "../../lib/firebase"; 
-import { doc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth, db } from "../../lib/firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import upload from "../../lib/upload";
-import { getDoc } from "firebase/firestore"; // Import getDoc
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import google1 from "../assets/images/google1.png"
 
 const Login = () => {
-    const [avatar, setAvatar] = useState({
-        file: null,
-        url: ""
-    });
+    const [avatar, setAvatar] = useState({ file: null, url: "" });
     const [loading, setLoading] = useState(false);
-    const [isLogin, setIsLogin] = useState(false); // Toggle between login and sign-up
+    const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
 
-    const validateEmail = (email) => {
-        return /\S+@\S+\.\S+/.test(email);
-    };
+    const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
     const handleAvatar = e => {
         if (e.target.files[0]) {
-            setAvatar({
-                file: e.target.files[0],
-                url: URL.createObjectURL(e.target.files[0])
-            });
+            setAvatar({ file: e.target.files[0], url: URL.createObjectURL(e.target.files[0]) });
         }
     };
 
@@ -37,140 +29,106 @@ const Login = () => {
         const formData = new FormData(e.target);
         const { username, email, password } = Object.fromEntries(formData);
 
-        // Validations
-        if (!username || !email || !password) {
-            toast.error("Please fill in all fields.");
-            setLoading(false);
-            return;
-        }
-        if (!validateEmail(email)) {
-            toast.error("Please enter a valid email.");
-            setLoading(false);
-            return;
-        }
-        if (password.length < 6) {
-            toast.error("Password should be at least 6 characters long.");
-            setLoading(false);
-            return;
-        }
+        if (!username || !email || !password) return toast.error("Please fill in all fields."), setLoading(false);
+        if (!validateEmail(email)) return toast.error("Invalid email."), setLoading(false);
+        if (password.length < 6) return toast.error("Password must be at least 6 characters."), setLoading(false);
 
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password);
             const imgUrl = await upload(avatar.file);
             const userData = { username, email, avatar: imgUrl, id: res.user.uid, blocked: [] };
-
-            // Store user info in Firestore
             await setDoc(doc(db, "users", res.user.uid), userData);
-
-            // Store user info in localStorage
             localStorage.setItem('user', JSON.stringify(userData));
-
             navigate('/');
         } catch (err) {
-            console.log(err);
             toast.error(err.message);
         } finally {
             setLoading(false);
         }
     };
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setLoading(true);
 
-// ... other code
+        const formData = new FormData(e.target);
+        const { email, password } = Object.fromEntries(formData);
 
-const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+        if (!email || !password) return toast.error("Please fill in all fields."), setLoading(false);
+        if (!validateEmail(email)) return toast.error("Invalid email."), setLoading(false);
 
-    const formData = new FormData(e.target);
-    const { email, password } = Object.fromEntries(formData);
-
-    // Validations
-    if (!email || !password) {
-        toast.error("Please fill in all fields.");
-        setLoading(false);
-        return;
-    }
-    if (!validateEmail(email)) {
-        toast.error("Please enter a valid email.");
-        setLoading(false);
-        return;
-    }
-    if (password.length < 6) {
-        toast.error("Password should be at least 6 characters long.");
-        setLoading(false);
-        return;
-    }
-
-    try {
-        const res = await signInWithEmailAndPassword(auth, email, password);
-        
-        // Fetch user info from Firestore and store it in localStorage
-        const userDocRef = doc(db, "users", res.user.uid); // Get the document reference
-        const userDoc = await getDoc(userDocRef); // Fetch the document data
-
-        if (userDoc.exists()) {
-            const userData = { id: res.user.uid, ...userDoc.data() }; // Access the data
-            localStorage.setItem('user', JSON.stringify(userData)); // Store it in localStorage
-
-            if (email === "nirbhay@gmail.com") {
-                navigate("/admin");
-            } else {
-                navigate("/");
-            }
-        } else {
-            toast.error("User data not found.");
+        try {
+            const res = await signInWithEmailAndPassword(auth, email, password);
+            const userDoc = await getDoc(doc(db, "users", res.user.uid));
+            if (!userDoc.exists()) return toast.error("User data not found.");
+            const userData = { id: res.user.uid, ...userDoc.data() };
+            localStorage.setItem('user', JSON.stringify(userData));
+            navigate(email === "nirbhay12@gmail.com" ? "/admin" : "/");
+        } catch (err) {
+            toast.error(err.message);
+        } finally {
+            setLoading(false);
         }
-    } catch (err) {
-        console.log(err);
-        toast.error(err.message);
-    } finally {
-        setLoading(false);
-    }
-};
+    };
+
+    const handleGoogle = async () => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            const userDocRef = doc(db, "users", user.uid);
+            const userDoc = await getDoc(userDocRef);
+            
+            let userData = userDoc.exists() ? { id: user.uid, ...userDoc.data() } : {
+                username: user.displayName,
+                email: user.email,
+                avatar: user.photoURL || "",
+                id: user.uid,
+                blocked: []
+            };
+            
+            if (!userDoc.exists()) await setDoc(userDocRef, userData);
+            localStorage.setItem('user', JSON.stringify(userData));
+            navigate(user.email === "nirbhay12@gmail.com" ? "/admin" : "/");
+        } catch (err) {
+            toast.error("Google sign-in failed.");
+        }
+    };
 
     return (
         <div className='loginContainer'>
-            {isLogin ? (
-                // Login form
-                <div className="signUpBox">
-                    <h2>Welcome back,</h2>
-                    <form onSubmit={handleLogin}>
-                        <input type="text" placeholder="Email" name="email" className="loginBox input" />
-                        <input type="password" placeholder="Password" name="password" className="loginBox input" />
-                        <button disabled={loading} className="submitBtn">{loading ? "Loading" : "Sign In"}</button>
-                    </form>
-                    <p className="loginFooter">
-                        Don't have an account?{" "}
-                        <span className="signinLink" onClick={() => setIsLogin(false)}>
-                            Sign Up here
-                        </span>
-                    </p>
+            <div className="signUpBox">
+                <h2>{isLogin ? "Welcome back," : "Create an Account"}</h2>
+                <form onSubmit={isLogin ? handleLogin : handleRegister}>
+                    {!isLogin && (
+                        <>
+                            <label htmlFor="file" className="imagePreviewContainer">
+                                <img src={avatar.url || "../assets/images/avatar.png"} alt="" className="profileImagePreview" />
+                                Upload an image
+                            </label>
+                            <input type="file" id="file" style={{ display: "none" }} onChange={handleAvatar} />
+                            <input type="text" placeholder="Username" name="username" className="loginBox input" />
+                        </>
+                    )}
+                    <input type="text" placeholder="Email" name="email" className="loginBox input" />
+                    <input type="password" placeholder="Password" name="password" className="loginBox input" />
+                    <button disabled={loading} className="submitBtn">{loading ? "Loading" : isLogin ? "Sign In" : "Sign Up"}</button>
+                </form>
+                <p className="loginFooter">
+                    {isLogin ? "Don't have an account? " : "Already have an account? "}
+                    <span className="signinLink" onClick={() => setIsLogin(!isLogin)}>
+                        {isLogin ? "Sign Up here" : "Log in here"}
+                    </span>
+                </p>
+                <div className="googleSignInContainer">
+                    <button className="googleSignInBtn" onClick={handleGoogle}>
+                        <img src={google1} alt="Google Icon" />
+                        Continue with Google
+                    </button>
                 </div>
-            ) : (
-                // Sign Up form
-                <div className="signUpBox">
-                    <h2>Create an Account</h2>
-                    <form onSubmit={handleRegister}>
-                        <label htmlFor="file" className="imagePreviewContainer">
-                            <img src={avatar.url || "../assets/images/avatar.png"} alt="" className="profileImagePreview" />
-                            Upload an image
-                        </label>
-                        <input type="file" id="file" style={{ display: "none" }} onChange={handleAvatar} />
-                        <input type="text" placeholder="Username" name="username" className="loginBox input" />
-                        <input type="text" placeholder="Email" name="email" className="loginBox input" />
-                        <input type="password" placeholder="Password" name="password" className="loginBox input" />
-                        <button disabled={loading} className="submitBtn">{loading ? "Loading" : "Sign Up"}</button>
-                    </form>
-                    <p className="signUpFooter">
-                        Already have an account?{" "}
-                        <span className="signinLink" onClick={() => setIsLogin(true)}>
-                            Log in here
-                        </span>
-                    </p>
-                </div>
-            )}
+            </div>
         </div>
     );
-}
+};
 
 export default Login;

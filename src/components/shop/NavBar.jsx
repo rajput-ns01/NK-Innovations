@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/ecommerce.svg';
+import homelogo from "../assets/images/background.png";
 import './Home.css';
 import { Icon } from 'react-icons-kit';
 import { cart } from 'react-icons-kit/entypo/cart';
@@ -17,9 +18,9 @@ export const NavBar = () => {
     return (
         <div className='navbox'>
             <div className="leftside">
-                <img src={logo} alt=''/>
+                <Link to="/"><img className='homelogo' src={homelogo} alt=''/></Link>
             </div>
-            <div className='cart-container' style={{justifyContent:'space-around'}}><Link to="/">Home</Link></div>
+           
             <div className="rightside">
             <div className="detail">
               <div className="user">

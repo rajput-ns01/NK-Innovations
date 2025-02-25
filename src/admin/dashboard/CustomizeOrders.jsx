@@ -4,6 +4,8 @@ import { collection, getDocs } from 'firebase/firestore';
 import './dashboard.css';
 import { Button } from 'bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
+import Sidebar from './SideBar';
 
 const CustomizeProductOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -29,6 +31,14 @@ const CustomizeProductOrders = () => {
   }, []);
 
   return (
+    <div className="admin-dashboard">
+      <Sidebar />
+      <div className="main-content">
+        <Header />
+        <div className="dashboard-section">
+          {/* Render the different sections based on route */}
+          {/* Add other components such as OrderManagement, ProductManagement */}
+        
     <div className="orders-container1">
       <h2>Customized Product Orders</h2>
       {orders.length === 0 ? (
@@ -44,6 +54,7 @@ const CustomizeProductOrders = () => {
               <th>Address</th>
               <th>Payment (₹)</th>
               <th>Quantity</th>
+              <th>Specification</th>
               <th>Products</th>
               <th>Order Timestamp</th>
               <th>User ID</th>
@@ -60,6 +71,8 @@ const CustomizeProductOrders = () => {
                 <td>{order.BuyerAddress}</td>
                 <td>{order.BuyerPayment}</td>
                 <td>{order.BuyerQuantity}</td>
+                <td>{order.specifications}</td>
+              {console.log(order)}
                 <td>
                   <select className="product-dropdown">
                     {order.Products.map(product => (
@@ -71,12 +84,15 @@ const CustomizeProductOrders = () => {
                 </td>
                 <td>{new Date(order.Timestamp).toLocaleString()}</td>
                 <td>{order.UserID}</td>
-                <td><button onClick={()=>{navigate('./invoice-detail',{state:order})}}>View</button></td>
+                <td><button className='admin-button' onClick={()=>{navigate('./invoice-detail',{state:order})}}>View</button></td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
+    </div>
+    </div>
+      </div>
     </div>
   );
 };

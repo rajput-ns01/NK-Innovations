@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../lib/firebase'; // Adjust the import path as necessary
 import { collection, getDocs } from 'firebase/firestore';
+import Sidebar from './SideBar';
+import Header from './Header';
 
 const JobApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -17,7 +19,14 @@ const JobApplications = () => {
   }, []);
 
   return (
+    
     <div className="job-applications">
+<div className="admin-dashboard">
+      <Sidebar/>
+      <div className="main-content">
+        <Header />
+        <div className="dashboard-section">
+        
       <h2>Job Applications</h2>
       <table>
         <thead>
@@ -59,6 +68,9 @@ const JobApplications = () => {
           ))}
         </tbody>
       </table>
+    </div>
+    </div>
+      </div>
     </div>
   );
 };

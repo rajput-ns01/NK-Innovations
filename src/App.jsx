@@ -96,7 +96,7 @@ const App = () => {
             {/*<Route path="/upload" element={<UploadForm/>} />*/}
 
             {/*--------------Admin Part------------------*/}
-            <Route path='/admin' element={<AdminRoute><AdminDashboard/></AdminRoute>}/>
+            <Route path='/admin' element={<AdminRoute><UserManagement /></AdminRoute>}/>
             <Route path='/admin/users' element={<AdminRoute><UserManagement /></AdminRoute>} />
             <Route path='/admin/readymade' element={<AdminRoute><ReadyMadeProductOrders/></AdminRoute>} />
             <Route path='/admin/customize' element={<AdminRoute><CustomizeProductOrders/></AdminRoute>} />

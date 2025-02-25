@@ -4,6 +4,8 @@ import { getStorage, ref, deleteObject } from 'firebase/storage';
 import { db, storage } from '../../lib/firebase';
 import { AddProducts } from '../../components/shop/AddProducts';
 import UploadForm from '../../components/customProducts/UploadForm';
+import Header from './Header';
+import Sidebar from './SideBar';
 
 const ProductManagement = () => {
   const [products, setProducts] = useState([]);
@@ -96,9 +98,17 @@ const ProductManagement = () => {
   };
 
   return (
+    <div className="admin-dashboard">
+      <Sidebar />
+      <div className="main-content">
+        <Header />
+        <div className="dashboard-section">
+          {/* Render the different sections based on route */}
+          {/* Add other components such as OrderManagement, ProductManagement */}
+        
     <div className="product-management">
       <h2>Product Management</h2>
-      <button onClick={handleAddProductClick}>
+      <button  className='admin-button' onClick={handleAddProductClick}>
         {isAddingProduct ? 'Close Add Product' : 'Add Product'}
       </button>
 
@@ -129,9 +139,9 @@ const ProductManagement = () => {
                 <td>{product.ProductName}</td>
                 <td>${product.ProductPrice}</td>
                 <td>{product.ProductStock}</td>
-                <td>
-                  <button onClick={() => handleEdit(product)}>Edit</button>
-                  <button onClick={() => handleDelete(product.id, 'Products', product.ProductImg)}>Delete</button>
+                <td style={{display:'flex'}}>
+                  <button className='admin-button' onClick={() => handleEdit(product)}>Edit</button>
+                  <button className='admin-button delete-admin' onClick={() => handleDelete(product.id, 'Products', product.ProductImg)}>Delete</button>
                 </td>
               </tr>
             ))
@@ -144,7 +154,7 @@ const ProductManagement = () => {
       </table>
 
       <h3>Raw Products</h3>
-      <button onClick={handleAddRawProductClick}>
+      <button className='admin-button' onClick={handleAddRawProductClick}>
         {isAddingRawProduct ? 'Close Add Raw Product' : 'Add Raw Product'}
       </button>
 
@@ -179,8 +189,8 @@ const ProductManagement = () => {
                 <td>${rawProduct.ProductPrice}</td>
                 <td>{rawProduct.ProductStock}</td>
                 <td>
-                  <button onClick={() => handleEditRawProduct(rawProduct)}>Edit</button>
-                  <button onClick={() => handleDelete(rawProduct.id, 'RawProducts', rawProduct.ProductImg)}>Delete</button>
+                  <button className='admin-button' onClick={() => handleEditRawProduct(rawProduct)}>Edit</button>
+                  <button className='admin-button delete-admin' onClick={() => handleDelete(rawProduct.id, 'RawProducts', rawProduct.ProductImg)}>Delete</button>
                 </td>
               </tr>
             ))
@@ -191,6 +201,9 @@ const ProductManagement = () => {
           )}
         </tbody>
       </table>
+    </div>
+    </div>
+      </div>
     </div>
   );
 };

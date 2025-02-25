@@ -9,7 +9,7 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 20px 40px;
+    padding: 5px 40px;
     padding-right: 0;
     background-color: transparent;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -56,7 +56,7 @@ nav ul li a {
 
 /* Logo styles */
 .logo img {
-    height: 60px; /* Adjust height of logo image */
+    height: 80px; /* Adjust height of logo image */
 }
 
 /* Styles for when header scrolls */

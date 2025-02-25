@@ -7,6 +7,7 @@ import { CartContext } from '../shop/CartContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'; // Updated import
 import NavBar from '../shop/NavBar';
+import useCheckoutStore from '../../lib/checkoutStore';
 
 const CustomizationPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -18,6 +19,7 @@ const CustomizationPage = () => {
   const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(true); // To manage checkout button state
   const { dispatch } = useContext(CartContext);
   const navigate = useNavigate(); // Updated hook
+  const { setSpecification, specification } = useCheckoutStore();
 
   // Add to cart function
   const addToCart = (product) => {
@@ -117,9 +119,9 @@ const CustomizationPage = () => {
           <label>Category:</label>
           <select className='select' value={selectedCategory} onChange={(e) => {
             setSelectedCategory(e.target.value);
-            setSelectedProduct(''); // Reset product when category changes
-            setSelectedMaterial(''); // Reset material when category changes
-            setSelectedMaterials(new Set()); // Reset selected materials when category changes
+            setSelectedProduct(''); 
+            setSelectedMaterial(''); 
+            setSelectedMaterials(new Set()); 
           }}>
             <option value="">--Select--</option>
             {Object.keys(productData).map((category) => (
@@ -134,8 +136,8 @@ const CustomizationPage = () => {
             <label>Product:</label>
             <select className='select' value={selectedProduct} onChange={(e) => {
               setSelectedProduct(e.target.value);
-              setSelectedMaterial(''); // Reset material when product changes
-              setSelectedMaterials(new Set()); // Reset selected materials when product changes
+              setSelectedMaterial('');
+              setSelectedMaterials(new Set()); 
             }}>
               <option value="">--Select--</option>
               {productData[selectedCategory].map((product) => (
@@ -159,6 +161,7 @@ const CustomizationPage = () => {
             </select>
           </div>
         )}
+        
 
         {/* Message to select all materials */}
         {!selectedMaterial && selectedProduct && (
@@ -166,8 +169,26 @@ const CustomizationPage = () => {
             <p>Please select all available materials for the chosen product to proceed with customization.</p>
           </div>
         )}
+  <textarea
+          className='specification'
+          value={specification}
+          onChange={(e) => setSpecification(e.target.value)} // Store in Zustand
+          placeholder='Enter your specification'
+        ></textarea>
 
-        {/* Display Filtered Products */}
+        <button
+          className='btn checkout-btn'
+          disabled={isCheckoutDisabled}
+          onClick={() => {
+            setSpecification(specification); // Save specification in global state
+            toast.success('Specification saved!');
+          }}
+        >
+          Add
+        </button>
+
+
+{/* Display Filtered Products */}
         {filteredProducts.length > 0 && (
           <div className="filtered-products">
             <h2>Product Details</h2>

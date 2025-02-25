@@ -3,6 +3,8 @@ import { getFirestore, collection, getDocs, deleteDoc, doc } from 'firebase/fire
 import { deleteObject, ref } from 'firebase/storage'; // Import for Firebase Storage
 import { db, storage } from '../../lib/firebase'; // Import your Firebase configuration
 import './dashboard.css';
+import Sidebar from './SideBar';
+import Header from './Header';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -29,11 +31,15 @@ const UserManagement = () => {
     try {
       // Step 1: Delete the user image from Firebase Storage (if it exists)
       if (userImageUrl) {
-        const imageRef = ref(storage, userImageUrl);
-        await deleteObject(imageRef);
-        console.log('User image deleted successfully');
+        try {
+          const imageRef = ref(storage, userImageUrl);
+          await deleteObject(imageRef);
+          console.log('User image deleted successfully');
+        } catch (storageError) {
+          console.warn('User image not found or already deleted:', storageError);
+        }
       }
-
+  
       // Step 2: Delete the user document from Firestore
       await deleteDoc(doc(db, 'users', userId));
       setUsers(users.filter((user) => user.id !== userId));
@@ -42,6 +48,7 @@ const UserManagement = () => {
       console.error('Error deleting user or image: ', error);
     }
   };
+  
 
   useEffect(() => {
     fetchUsers();
@@ -52,6 +59,15 @@ const UserManagement = () => {
   }
 
   return (
+    <>
+    <div className="admin-dashboard">
+      <Sidebar />
+      <div className="main-content">
+        <Header />
+        <div className="dashboard-section">
+          {/* Render the different sections based on route */}
+          {/* Add other components such as OrderManagement, ProductManagement */}
+        
     <div className="user-management-container">
       <h2>User Management</h2>
       <table className="user-table">
@@ -89,6 +105,10 @@ const UserManagement = () => {
         </tbody>
       </table>
     </div>
+    </div>
+      </div>
+    </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/background.png';
 import '../styles/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +31,10 @@ const Header = () => {
   const handleUserClick = () => {
     navigate('/user-details'); // Redirect to the UserDetails page
   };
-
+  useEffect(() => {
+    console.log("Current User:", currentUser);
+  }, [currentUser]);
+  
   return (
     <header className={scrollPosition > 100 ? 'header-scroll' : ''}>
       <div className="logo">

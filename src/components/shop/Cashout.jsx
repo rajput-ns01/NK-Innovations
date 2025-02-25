@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, collection, addDoc, updateDoc } from 'firebase/firestore';
 import NavBar from './NavBar';
 import { toast } from 'react-toastify';
+import useCheckoutStore from '../../lib/checkoutStore';
 
 export const Cashout = (props) => {
+
     const navigate = useNavigate();
     const { shoppingCart, totalPrice, totalQty, dispatch } = useContext(CartContext);
 
@@ -17,7 +19,9 @@ export const Cashout = (props) => {
     const [error, setError] = useState('');
     const [cellError, setCellError] = useState('');
     const [addressError, setAddressError] = useState('');
+    const { specification } = useCheckoutStore();
 
+    console.log('Specification:', specification);
     useEffect(() => {
         const fetchUserData = async (user) => {
             const userDoc = doc(db, 'users', user.uid);
@@ -66,7 +70,7 @@ export const Cashout = (props) => {
 
         return isValid;
     };
-
+    console.log(props);
     const purchaseProduct = async (productId, purchaseQuantity, isCustomProduct) => {
         try {
             if (!isCustomProduct) {
@@ -109,6 +113,7 @@ export const Cashout = (props) => {
                     BuyerPayment: totalPrice,
                     BuyerQuantity: totalQty,
                     Timestamp: date.getTime(),
+                    specifications: specification || '',
                 };
 
                 let allSuccessful = true;
@@ -135,6 +140,7 @@ export const Cashout = (props) => {
                             ...product,
                             category,
                             materialName,
+                               
                         });
                     }
                 }
@@ -223,6 +229,8 @@ export const Cashout = (props) => {
                         <label htmlFor="totalNoOfProducts" className='form-label'>Total No of Products</label>
                         <input type="number" className='form-control' value={totalQty} disabled />
                     </div>
+                    
+
                     <button type="submit" className='btn btn-success btn-md mybtn'>SUBMIT</button>
                 </form>
             </div>
