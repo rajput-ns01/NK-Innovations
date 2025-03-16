@@ -55,6 +55,9 @@ const Login = () => {
             await setDoc(doc(db, "users", res.user.uid), userData);
             localStorage.setItem("user", JSON.stringify(userData));
             navigate("/");
+            setTimeout(() => {
+                window.location.reload();
+            }, 50);
         } catch (err) {
             toast.error(err.message);
         } finally {
@@ -88,6 +91,7 @@ const Login = () => {
             const userData = { id: res.user.uid, ...userDoc.data() };
             localStorage.setItem("user", JSON.stringify(userData));
             navigate(email === "nirbhay12@gmail.com" ? "/admin" : "/");
+            
         } catch (err) {
             toast.error(err.message);
         } finally {
@@ -122,6 +126,9 @@ const Login = () => {
 
             localStorage.setItem("user", JSON.stringify(userData));
             navigate(user.email === "nirbhay12@gmail.com" ? "/admin" : "/");
+            setTimeout(() => {
+                window.location.reload();
+            }, 50);
         } catch (err) {
             toast.error("Google sign-in failed.");
         }
