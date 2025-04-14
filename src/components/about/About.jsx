@@ -23,13 +23,13 @@ const About = () => {
         </div>
         <div className="text-right">
           <p>
-            At Meera AI, we specialize in providing top-notch customized and ready-made products to meet the diverse needs of our clients. Our mission is to bridge the gap between imagination and reality by offering innovative solutions tailored to your specific requirements.
+            At NK Innovations, we specialize in providing top-notch customized and ready-made products to meet the diverse needs of our clients. Our mission is to bridge the gap between imagination and reality by offering innovative solutions tailored to your specific requirements.
           </p>
           <p>
             Whether you're looking for personalized products or efficient ready-made options, we are committed to delivering excellence. Our team combines cutting-edge technology with customer-centricity to ensure your satisfaction and success.
           </p>
           <p>
-            Join us in revolutionizing the way industries approach product development and customization. With Meera AI, you have a trusted partner to help bring your ideas to life.
+            Join us in revolutionizing the way industries approach product development and customization. With NK Innovations, you have a trusted partner to help bring your ideas to life.
           </p>
         </div>
       </section>
@@ -39,13 +39,13 @@ const About = () => {
           <img src={person1} alt="Emma Crabtree" />
           <h3>Emma Crabtree</h3>
           <h4>Founder & Director</h4>
-          <p>"We believed in empowering customers with both flexibility and quality—Meera AI makes it happen every day!"</p>
+          <p>"We believed in empowering customers with both flexibility and quality—NK Innovations makes it happen every day!"</p>
         </div>
         <div className="team-member" style={{ backgroundColor: '#ffde59' }}>
           <img src={person2} alt="Sam Harvey" />
           <h3>Sam Harvey</h3>
           <h4>Product Development Specialist</h4>
-          <p>"Meera AI has redefined how we deliver customized and ready-made solutions with speed and precision."</p>
+          <p>"NK Innovations has redefined how we deliver customized and ready-made solutions with speed and precision."</p>
         </div>
         <div className="team-member" style={{ backgroundColor: '#ccffcc' }}>
           <img src={person3} alt="Drew Fivey" />
@@ -57,7 +57,7 @@ const About = () => {
           <img src={person4} alt="Raaheel Mehmood" />
           <h3>Raaheel Mehmood</h3>
           <h4>Customer Experience Manager</h4>
-          <p>"Ensuring customer satisfaction is at the heart of everything we do at Meera AI."</p>
+          <p>"Ensuring customer satisfaction is at the heart of everything we do at NK Innovations."</p>
         </div>
       </div>
 

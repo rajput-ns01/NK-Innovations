@@ -5,8 +5,8 @@ export const productData = {
   ],
   "Autonomous Vehicles": [
     { name: 'Drones', materials: ['Frame', 'Motors', 'Propellers', 'Cameras'] },
-    { name: 'Autonomous Cars', materials: ['Chassis', 'Motors', 'LIDAR', 'GPS'] },
-    { name: 'AGVs', materials: ['Chassis', 'Motors', 'Sensors', 'Battery'] },
+    {/*{ name: 'Autonomous Cars', materials: ['Chassis', 'Motors', 'LIDAR', 'GPS'] },
+    { name: 'AGVs', materials: ['Chassis', 'Motors', 'Sensors', 'Battery'] },*/}
   ],
   "Service Robots": [
     { name: 'Healthcare Robots', materials: ['Frame', 'Motors', 'Sensors', 'Medical Instruments'] },

@@ -196,7 +196,7 @@ const CustomizationPage = () => {
               {filteredProducts.map((product, index) => (
                 <div key={index} className="product-card">
                   <img src={product.ProductImg} alt={product.ProductName} />
-                  <h3>{product.ProductName}</h3>
+                  {/*<h3>{product.ProductName}</h3>*/}
                   <p><strong>Price:</strong> {product.ProductPrice}</p>
                   <p><strong>Stock:</strong> {product.ProductStock}</p>
                   <button className='btn' onClick={() => addToCart(product)}>Add to Cart</button>
